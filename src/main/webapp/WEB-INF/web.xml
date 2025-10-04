@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+    <mime-mapping>
+        <extension>woff2</extension>
+        <mime-type>font/woff2</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>woff</extension>
+        <mime-type>font/woff</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>ttf</extension>
+        <mime-type>font/ttf</mime-type>
+    </mime-mapping>
+
+    <context-param>
+        <param-name>UPLOAD_BASE_DIR</param-name>
+        <param-value>/var/app-data/md-uploads</param-value>
+    </context-param>
+
+
+
+
+
+
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>AdminAndManager</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+
+            <!--            <url-pattern>/rest/admin/*</url-pattern>-->
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>PUT</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+            <role-name>manager</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>ManagerOnly</web-resource-name>
+            <url-pattern>/admin/uploadExcel</url-pattern>
+            <url-pattern>/admin/confirmPMChecklist</url-pattern>
+            <url-pattern>/mdUser/*</url-pattern>
+            <url-pattern>/user/*</url-pattern>
+
+            <!--            <url-pattern>/rest/admin/*</url-pattern>-->
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>PUT</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>manager</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>MD Panel</web-resource-name>
+            <url-pattern>/mdUser/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>mdUser</role-name>
+            <role-name>manager</role-name>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>User</web-resource-name>
+            <url-pattern>/user/*</url-pattern>
+<!--            <url-pattern>/rest/user/*</url-pattern>-->
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>PUT</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>mdUser</role-name>
+            <role-name>deptUser</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/login-error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <role-name>mdUser</role-name>
+    </security-role>
+    <security-role>
+        <role-name>manager</role-name>
+    </security-role>
+    <security-role>
+        <role-name>deptUser</role-name>
+    </security-role>
+
+</web-app>
