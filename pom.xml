@@ -301,6 +301,13 @@
             <version>74.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-client</artifactId>
+            <version>2.1.4</version>
+        </dependency>
+
+
 
         <!--        <dependency>-->
 <!--            <groupId>com.itextpdf</groupId>-->

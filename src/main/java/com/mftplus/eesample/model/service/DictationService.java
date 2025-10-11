@@ -49,6 +49,7 @@ public class DictationService {
         seg.setStartSec(s);
         seg.setEndSec(e);
         segments.get(dictId).add(seg);
+        System.out.println("SEGMENT ADDED dict=" + segIdGen + " final=" + isFinal + " text=" + text);
         if (d.getStatus() == Dictation.Status.STARTED) d.setStatus(Dictation.Status.STREAMING);
     }
 
