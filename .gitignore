@@ -35,4 +35,4 @@ build/
 .vscode/
 
 ### Mac OS ###
-.DS_Store
+.DS_Store-e "venv/\n.venv/\n*.pyc\n__pycache__/\n" 
