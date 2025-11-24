@@ -4,7 +4,7 @@
 <body>
 <h2>ASR WebApp</h2>
 <ul>
-    <li><a href="dictation/test.jsp">تست دیکته (WebSocket)</a></li>
+    <li><a href="sabt.jsp">ثبت اقلام اتاق عمل</a></li>
 </ul>
 </body>
 </html>

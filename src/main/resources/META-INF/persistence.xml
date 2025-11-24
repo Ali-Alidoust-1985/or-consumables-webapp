@@ -7,6 +7,16 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>jdbc/JtaDataSource</jta-data-source>
         <non-jta-data-source>jdbc/NonJtaDataSource</non-jta-data-source>
+        <class>com.mftplus.eesample.model.entity.IrcCatalogItem</class>
+        <class>com.mftplus.eesample.model.entity.Patient</class>
+        <class>com.mftplus.eesample.model.entity.OperatingRoom</class>
+        <class>com.mftplus.eesample.model.entity.SurgeryCase</class>
+        <class>com.mftplus.eesample.model.entity.Consumable</class>
+        <class>com.mftplus.eesample.model.entity.CaseConsumption</class>
+        <class>com.mftplus.eesample.model.entity.CaseReport</class>
+        <class>com.mftplus.eesample.model.entity.Patient</class>
+        <class>com.mftplus.eesample.model.entity.Staff</class>
+
 
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>

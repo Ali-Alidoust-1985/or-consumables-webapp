@@ -9,7 +9,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e8feb96-d982-4276-af92-4e8ba35cc504" name="Changes" comment="First Commit" />
+    <list default="true" id="5e8feb96-d982-4276-af92-4e8ba35cc504" name="Changes" comment="First Commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/servlet/AdminHomeServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/servlet/CatalogImportServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/servlet/CatalogSearchServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseConsumption.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseReport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Consumable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/IrcCatalogItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/OperatingRoom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Patient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Staff.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/SurgeryCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/AnesthesiaType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/CaseStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/Gender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/SourceType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/UnitOfMeasure.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/IrcCatalogImportService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/utils/MapToJsonConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/sabt.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/20b25a34-60e4-4b1a-9743-c94381aa831e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/20b25a34-60e4-4b1a-9743-c94381aa831e.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/rest/DictationResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/rest/RestApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/ws/AudioStreamEndpoint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/ws/WsClients.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Department.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Dictation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/TranscriptSegment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/DictationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/asr/AsrGateway.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/asr/MockAsrGateway.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/asr/PythonAsrGateway.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/panel.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/panel.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pmPreview.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/dictation/test.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,35 +89,37 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="33PT6p4D6cLbqNk26QW0NhdRrvz" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TomEE Server.TomEE 9.1..executor": "Run",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Java EE/or-consumables-webapp",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TomEE Server.TomEE 9.1..executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Java EE/or-consumables-webapp&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "oracle"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;oracle&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="TomEE 9.1." type="TomeeConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="TomEE 9.1." ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="C:/Program Files/Java/jdk-11" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -91,7 +132,6 @@
       </deployment>
       <server-settings>
         <option name="BASE_DIRECTORY_NAME" value="42d2d4fa-be4f-48ad-b23c-87de56d66e45" />
-        <option name="HTTP_PORT" value="80" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -189,7 +229,13 @@
       <workItem from="1759217696564" duration="27518000" />
       <workItem from="1760026949370" duration="8704000" />
       <workItem from="1762970540255" duration="7000" />
-      <workItem from="1762970596896" duration="5436000" />
+      <workItem from="1762970596896" duration="6672000" />
+      <workItem from="1763361529053" duration="7000" />
+      <workItem from="1763804008206" duration="620000" />
+      <workItem from="1763971674578" duration="3875000" />
+      <workItem from="1763975988614" duration="2000000" />
+      <workItem from="1763982350081" duration="97000" />
+      <workItem from="1763982529999" duration="747000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -223,7 +269,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763121213254</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="First Commit">
+      <option name="closed" value="true" />
+      <created>1763121240815</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1763121240815</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
