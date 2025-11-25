@@ -2,8 +2,14 @@ package com.mftplus.eesample.model.entity;
 
 import com.mftplus.eesample.model.enums.SourceType;
 import jakarta.persistence.*;
-import java.time.*;
+import lombok.*;
 
+import java.time.*;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(
         name="CASE_CONSUMPTION",

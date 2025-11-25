@@ -9,45 +9,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e8feb96-d982-4276-af92-4e8ba35cc504" name="Changes" comment="First Commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/servlet/AdminHomeServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/servlet/CatalogImportServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/servlet/CatalogSearchServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseConsumption.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseReport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Consumable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/IrcCatalogItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/OperatingRoom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Patient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Staff.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/SurgeryCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/AnesthesiaType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/CaseStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/Gender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/SourceType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/UnitOfMeasure.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/IrcCatalogImportService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/utils/MapToJsonConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/sabt.jsp" afterDir="false" />
+    <list default="true" id="5e8feb96-d982-4276-af92-4e8ba35cc504" name="Changes" comment="تنظیم چارچوب کلی و موجودیت ها و سرویس افزودن اکسل موجودی انبار و UI ادمین">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/OrConsumablesApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/ScanResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/UsageResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/ErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/ItemScanResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/MessageDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/PatientScanResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/ScanRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/SurgeryConsumableUsage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/SurgeryStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/OrScanService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/20b25a34-60e4-4b1a-9743-c94381aa831e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/20b25a34-60e4-4b1a-9743-c94381aa831e.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/rest/DictationResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/rest/RestApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/ws/AudioStreamEndpoint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/ws/WsClients.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Department.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Dictation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/TranscriptSegment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/DictationService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/asr/AsrGateway.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/asr/MockAsrGateway.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/asr/PythonAsrGateway.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseConsumption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseConsumption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Consumable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Consumable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/IrcCatalogItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/IrcCatalogItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/OperatingRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/OperatingRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Patient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/SurgeryCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/SurgeryCase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/panel.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/panel.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/pmPreview.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/dictation/test.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/sabt.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/sabt.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +44,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Jsp File" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -235,7 +222,8 @@
       <workItem from="1763971674578" duration="3875000" />
       <workItem from="1763975988614" duration="2000000" />
       <workItem from="1763982350081" duration="97000" />
-      <workItem from="1763982529999" duration="747000" />
+      <workItem from="1763982529999" duration="4425000" />
+      <workItem from="1764014539409" duration="10224000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -277,7 +265,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763121240815</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="تنظیم چارچوب کلی و موجودیت ها و سرویس افزودن اکسل موجودی انبار و UI ادمین">
+      <option name="closed" value="true" />
+      <created>1763983580448</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1763983580448</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,6 +281,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="First Commit" />
+    <MESSAGE value="تنظیم چارچوب کلی و موجودیت ها و سرویس افزودن اکسل موجودی انبار و UI ادمین" />
+    <option name="LAST_COMMIT_MESSAGE" value="تنظیم چارچوب کلی و موجودیت ها و سرویس افزودن اکسل موجودی انبار و UI ادمین" />
   </component>
 </project>

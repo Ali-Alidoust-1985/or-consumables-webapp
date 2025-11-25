@@ -1,7 +1,13 @@
 package com.mftplus.eesample.model.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity @Table(name="STAFF", indexes = @Index(name="IX_STAFF_CODE", columnList="CODE"))
 public class Staff {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

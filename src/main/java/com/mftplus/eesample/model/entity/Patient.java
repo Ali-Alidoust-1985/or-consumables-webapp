@@ -2,9 +2,15 @@ package com.mftplus.eesample.model.entity;
 
 import com.mftplus.eesample.model.enums.Gender;
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.time.LocalDate;
 import java.util.*;
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity @Table(
         name = "PATIENT",
         uniqueConstraints = @UniqueConstraint(name="UK_PATIENT_CODE", columnNames = "PATIENT_CODE"),

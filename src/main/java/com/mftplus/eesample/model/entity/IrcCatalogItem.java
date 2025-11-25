@@ -1,8 +1,14 @@
 package com.mftplus.eesample.model.entity;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
+import lombok.*;
 
+import java.math.BigDecimal;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "IRC_CATALOG", indexes = @Index(name = "IX_IRC_CODE", columnList = "IRC_CODE"))
 public class IrcCatalogItem {

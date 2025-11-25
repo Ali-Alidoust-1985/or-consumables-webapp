@@ -1,7 +1,13 @@
 package com.mftplus.eesample.model.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity @Table(
         name="OPERATING_ROOM",
         uniqueConstraints = @UniqueConstraint(name="UK_OR_CODE", columnNames = "CODE")

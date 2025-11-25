@@ -1,8 +1,14 @@
 package com.mftplus.eesample.model.entity;
 
 import jakarta.persistence.*;
-import java.time.*;
+import lombok.*;
 
+import java.time.*;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(
         name="CASE_REPORT",

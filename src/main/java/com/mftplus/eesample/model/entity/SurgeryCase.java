@@ -3,8 +3,14 @@ package com.mftplus.eesample.model.entity;
 import com.mftplus.eesample.model.enums.AnesthesiaType;
 import com.mftplus.eesample.model.enums.CaseStatus;
 import jakarta.persistence.*;
-import java.time.*;
+import lombok.*;
 
+import java.time.*;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity @Table(
         name="SURGERY_CASE",
         uniqueConstraints = @UniqueConstraint(name="UK_CASE_NO", columnNames = "CASE_NO"),
