@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
@@ -392,7 +391,7 @@
                     <div class="step-icon">👤</div>
                     <div class="step-text">
                         <strong>گام ۱ – اسکن مچ‌بند بیمار</strong>
-                        <span>گوشی / دوربین را نزدیک مچ‌بند بیمار بگیرید تا بارکد یا QR روی مچ‌بند خوانده شود. بعد از موفقیت، نام بیمار و شماره کیس بالای صفحه نمایش داده می‌شود.</span>
+                        <span>گوشی / دوربین را نزدیک مچ‌بند بیمار بگیرید تا QR یا بارکد روی مچ‌بند خوانده شود. بعد از موفقیت، نام بیمار بالای صفحه نمایش داده می‌شود.</span>
                     </div>
                 </li>
                 <li>
@@ -414,260 +413,295 @@
             <div class="hint-box">
                 نکات ایمنی:<br>
                 • اگر بارکدی اشتباه خوانده شد، می‌توان آن را بعداً در پنل ادمین اصلاح کرد.<br>
-                • در صورت قطع اینترنت یا مشکل سرور، می‌توانیم در نسخه‌های بعدی قابلیت ذخیرهٔ محلی را اضافه کنیم.
+                • در صورت قطع اینترنت یا مشکل سرور، می‌توانیم در نسخه‌های بعدی قابلیت ذخیرهٔ آفلاین را اضافه کنیم.
             </div>
         </aside>
     </div>
 </div>
 
-<!-- ZXing (گوگل) – پشتیبان بارکد و QR -->
-<script src="https://unpkg.com/@zxing/browser@latest"></script>
+<!-- ZXing: خواندن QR و بارکدهای 1D -->
+<script src="https://unpkg.com/@zxing/library@0.19.1"></script>
 
 <script>
-// base path بر اساس contextPath برنامه (جایگزین <c:url> که داخل js اذیت می‌کرد)
-    const CONTEXT_PATH = '${pageContext.request.contextPath}';
-    const API_BASE = CONTEXT_PATH + '/api/scans';
+    // ---- تنظیم آدرس API‌ها (بدون c:url) ----
+    var BASE        = '<%= request.getContextPath() %>';  // معمولاً خالی است چون اپ به صورت ROOT دپلوی شده
+    var API_PATIENT = BASE + '/api/scans/patient';
+    var API_ITEM    = BASE + '/api/scans/item';
+    // اگر finalize را روی مسیر دیگری گذاشتی، این را عوض کن:
+    var API_FINAL   = BASE + '/api/usage/finalize';
 
-    const video = document.getElementById('cam');
-    const logBox = document.getElementById('logBox');
+    // ---- عناصر UI ----
+    var video      = document.getElementById('cam');
+    var logBox     = document.getElementById('logBox');
+    var patientPill= document.getElementById('patientPill');
+    var sessionInfo= document.getElementById('sessionInfo');
 
-    const patientPill = document.getElementById('patientPill');
-    const sessionInfo = document.getElementById('sessionInfo');
+    var btnPatient  = document.getElementById('btnPatient');
+    var btnItem     = document.getElementById('btnItem');
+    var btnFinalize = document.getElementById('btnFinalize');
+    var btnClear    = document.getElementById('btnClear');
 
-    const btnPatient  = document.getElementById('btnPatient');
-    const btnItem     = document.getElementById('btnItem');
-    const btnFinalize = document.getElementById('btnFinalize');
-    const btnClear    = document.getElementById('btnClear');
+    var chip1 = document.getElementById('chipStep1');
+    var chip2 = document.getElementById('chipStep2');
+    var chip3 = document.getElementById('chipStep3');
 
-    const chip1 = document.getElementById('chipStep1');
-    const chip2 = document.getElementById('chipStep2');
-    const chip3 = document.getElementById('chipStep3');
+    var itemsBox  = document.getElementById('itemsBox');
+    var itemsBody = document.getElementById('itemsBody');
+    var itemsCount= document.getElementById('itemsCount');
 
-    const itemsBox  = document.getElementById('itemsBox');
-    const itemsBody = document.getElementById('itemsBody');
-    const itemsCount= document.getElementById('itemsCount');
+    // ---- وضعیت داخلی ----
+    var mode = 'patient';    // 'patient' | 'item'
+    var lastDecoded = '';
+    var lastScanTime = 0;
 
-    let mode = 'patient';       // 'patient' | 'item'
-    let codeReader = null;      // ZXing reader
-    let controls = null;        // برای stop کردن
-    let lastDecoded = '';
-    let lastScanTime = 0;
-
-    const state = {
-    patient: null,          // پاسخ PatientScanResponse
-    items: []              // {code, name, qty}
+    var state = {
+        patient: null,       // جواب PatientScanResponse
+        items: []            // آرایه از {code, name, qty}
     };
 
+    var codeReader = null;
+    var scanning   = false;
+
     function log(msg) {
-    const time = new Date().toLocaleTimeString('fa-IR', {hour12:false});
-    logBox.insertAdjacentHTML('afterbegin', `<div>[${time}] ${msg}</div>`);
+        var time = new Date().toLocaleTimeString('fa-IR', {hour12:false});
+        logBox.insertAdjacentHTML('afterbegin',
+            '<div>[' + time + '] ' + msg + '</div>');
     }
 
     function setStep(step) {
-    chip1.classList.remove('active');
-    chip2.classList.remove('active');
-    chip3.classList.remove('active');
-    if (step === 1) chip1.classList.add('active');
-    else if (step === 2) chip2.classList.add('active');
-    else chip3.classList.add('active');
+        chip1.classList.remove('active');
+        chip2.classList.remove('active');
+        chip3.classList.remove('active');
+        if (step === 1) chip1.classList.add('active');
+        else if (step === 2) chip2.classList.add('active');
+        else chip3.classList.add('active');
     }
 
+    // --- ZXing: شروع اسکن از دوربین (QR + بارکد) ---
     async function startScanner() {
-    if (controls) return; // قبلاً فعال شده
-    try {
-    if (!codeReader) {
-    codeReader = new ZXing.BrowserMultiFormatReader();
-    }
-    // انتخاب اولین دوربین (معمولاً پشت گوشی)
-    const devices = await ZXing.BrowserCodeReader.listVideoInputDevices();
-    const deviceId = devices.length ? devices[0].deviceId : null;
+        if (scanning) return;
 
-    controls = await codeReader.decodeFromVideoDevice(deviceId, video, (result, err, _controls) => {
-    if (result) {
-    const txt = (result.text || (result.getText ? result.getText() : '') || '').trim();
-    if (txt) {
-    handleDecoded(txt);
-    }
-    }
-    // errorهای «NotFound» را لازم نیست لاگ کنیم، یعنی فقط هنوز چیزی پیدا نشده
-    });
-    log('📷 اسکنر فعال شد.');
-    } catch (e) {
-    log('❌ دسترسی به دوربین یا راه‌اندازی ZXing ممکن نیست: ' + e.message);
-    }
+        if (!codeReader) {
+            var hints = new Map();
+            hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [
+                ZXing.BarcodeFormat.QR_CODE,
+                ZXing.BarcodeFormat.CODE_128,
+                ZXing.BarcodeFormat.CODE_39,
+                ZXing.BarcodeFormat.EAN_13,
+                ZXing.BarcodeFormat.EAN_8,
+                ZXing.BarcodeFormat.UPC_A,
+                ZXing.BarcodeFormat.UPC_E
+            ]);
+            codeReader = new ZXing.BrowserMultiFormatReader(hints);
+        }
+
+        try {
+            await codeReader.decodeFromVideoDevice(
+                null,        // دوربین پیش‌فرض (معمولاً پشت گوشی)
+                'cam',
+                function (result, err) {
+                    if (result) {
+                        var text = result.getText();
+                        if (text) {
+                            handleDecoded(text.trim());
+                        }
+                    }
+                    // خطاهای موقتی (NotFound/Checksum/Format) را نادیده می‌گیریم
+                }
+            );
+            scanning = true;
+            log('📷 اسکنر فعال شد.');
+        } catch (e) {
+            log('❌ خطا در راه‌اندازی اسکنر: ' + e.message);
+        }
     }
 
     function stopScanner() {
-    if (controls && typeof controls.stop === 'function') {
-    controls.stop();
-    }
-    controls = null;
-    if (codeReader) {
-    codeReader.reset();
-    }
+        if (codeReader) {
+            codeReader.reset();
+        }
+        scanning = false;
     }
 
     async function postJSON(url, data) {
-    const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: data ? JSON.stringify(data) : '{}'
-    });
-    if (!res.ok) {
-    const txt = await res.text();
-    throw new Error(txt || ('HTTP ' + res.status));
-    }
-    return res.json();
+        var res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        if (!res.ok) {
+            throw new Error(await res.text());
+        }
+        return res.json();
     }
 
     function upsertItem(payload) {
-    // فرض: backend در ItemScanResponse حداقل code و name و qty را برمی‌گرداند
-    const code = payload.code || (payload.consumable && payload.consumable.gtin) || '—';
-    const name = payload.name || (payload.consumable && payload.consumable.name) || '—';
+        // انتظار: payload.code , payload.itemName (یا شبیه آن)
+        var code = payload.code || (payload.consumable && payload.consumable.gtin) || '';
+        var name = payload.itemName || (payload.consumable && payload.consumable.name) || '—';
 
-    let item = state.items.find(i => i.code === code);
-    if (!item) {
-    item = {code, name, qty: 0};
-    state.items.push(item);
-    }
-    item.qty += (payload.qty || 1);
-    renderItems();
+        var item = state.items.find(function (i) { return i.code === code; });
+        if (!item) {
+            item = {code: code, name: name, qty: 0};
+            state.items.push(item);
+        }
+        item.qty += (payload.qty || 1);
+
+        renderItems();
     }
 
     function renderItems() {
-    if (!state.items.length) {
-    itemsBox.style.display = 'none';
-    itemsBody.innerHTML = '';
-    itemsCount.textContent = '0';
-    btnFinalize.disabled = true;
-    setStep(state.patient ? 2 : 1);
-    return;
-    }
-    itemsBox.style.display = 'block';
-    itemsBody.innerHTML = '';
-    state.items.forEach((it, idx) => {
-    itemsBody.insertAdjacentHTML('beforeend', `
-    <tr>
-    <td>${idx + 1}</td>
-    <td>${it.code}</td>
-    <td>${it.name}</td>
-    <td>${it.qty}</td>
-    </tr>
-    `);
-    });
-    itemsCount.textContent = state.items.length.toString();
-    btnFinalize.disabled = !(state.patient && state.items.length);
-    setStep(state.patient && state.items.length ? 3 : 2);
+        if (!state.items.length) {
+            itemsBox.style.display = 'none';
+            itemsBody.innerHTML = '';
+            itemsCount.textContent = '0';
+            btnFinalize.disabled = true;
+            return;
+        }
+        itemsBox.style.display = 'block';
+        itemsBody.innerHTML = '';
+
+        state.items.forEach(function (it, idx) {
+            var row =
+                '<tr>' +
+                '<td>' + (idx + 1) + '</td>' +
+                '<td>' + it.code + '</td>' +
+                '<td>' + it.name + '</td>' +
+                '<td>' + it.qty + '</td>' +
+                '</tr>';
+            itemsBody.insertAdjacentHTML('beforeend', row);
+        });
+
+        itemsCount.textContent = String(state.items.length);
+        btnFinalize.disabled = !(state.patient && state.items.length);
+        setStep(state.patient && state.items.length ? 3 : 2);
     }
 
     function clearAll() {
-    state.patient = null;
-    state.items = [];
-    renderItems();
-    patientPill.classList.remove('ok');
-    patientPill.innerHTML =
-    '<div class="pill-dot"></div> بیمار انتخاب نشده';
-    sessionInfo.textContent = 'سشن فعال نیست';
-    btnItem.disabled = true;
-    btnFinalize.disabled = true;
-    setStep(1);
-    lastDecoded = '';
-    lastScanTime = 0;
-    log('🔄 سشن جدید آغاز شد.');
+        state.patient = null;
+        state.items = [];
+        renderItems();
+
+        patientPill.classList.remove('ok');
+        patientPill.innerHTML = '<div class="pill-dot"></div> بیمار انتخاب نشده';
+        sessionInfo.textContent = 'سشن فعال نیست';
+
+        btnItem.disabled = true;
+        btnFinalize.disabled = true;
+
+        setStep(1);
+        log('🔄 سشن جدید آغاز شد.');
     }
 
     async function handleDecoded(code) {
-    const now = Date.now();
-    if (code === lastDecoded && now - lastScanTime < 1500) return; // debouncing
-    lastDecoded = code;
-    lastScanTime = now;
+        var now = Date.now();
+        if (code === lastDecoded && (now - lastScanTime) < 1500) {
+            // جلوگیری از ثبت چندباره‌ی همان کد
+            return;
+        }
+        lastDecoded = code;
+        lastScanTime = now;
 
-    if (mode === 'patient') {
-    log('در حال اعتبارسنجی مچ‌بند/کد بیمار: ' + code);
-    try {
-    const p = await postJSON(API_BASE + '/patient', { code: code });
-    state.patient = p;
+        if (mode === 'patient') {
+            log('در حال اعتبارسنجی مچ‌بند: ' + code);
+            try {
+                var p = await postJSON(API_PATIENT, { code: code });
+                state.patient = p;
 
-    patientPill.classList.add('ok');
-    const caseText = p.caseNo ? ` | کیس: ${p.caseNo}` :
-    (p.surgeryCaseId ? ` | CaseId: ${p.surgeryCaseId}` : '');
-    patientPill.innerHTML =
-    `<div class="pill-dot"></div> بیمار: ${p.fullName || '—'}${caseText}`;
+                patientPill.classList.add('ok');
+                var fullName = p.fullName || '—';
+                var patientCode = p.patientCode || code;
+                var caseNo   = p.caseNo || '—';
 
-    sessionInfo.textContent = 'سشن فعال برای بیمار';
-    btnItem.disabled = false;
-    setStep(2);
-    log('✅ مچ‌بند بیمار تأیید شد.');
-    } catch (e) {
-    log('❌ خطا در ثبت مچ‌بند: ' + e.message);
-    }
-    } else if (mode === 'item') {
-    if (!state.patient) {
-    log('⚠️ ابتدا مچ‌بند بیمار را اسکن کنید.');
-    setStep(1);
-    return;
-    }
-    log('در حال ثبت کالای مصرفی: ' + code);
-    try {
-    const x = await postJSON(API_BASE + '/item', { code: code });
-    upsertItem(x);
-    const nm = x.name || (x.consumable && x.consumable.name) || code;
-    log('📦 کالا ثبت شد: ' + nm);
-    } catch (e) {
-    log('❌ خطا در ثبت کالا: ' + e.message);
-    }
-    }
+                patientPill.innerHTML =
+                    '<div class="pill-dot"></div> ' +
+                    'بیمار: ' + fullName +
+                    ' | کد مچ‌بند: ' + patientCode +
+                    (p.caseNo ? ' | عمل: ' + caseNo : '');
+
+                sessionInfo.textContent = p.caseNo
+                    ? ('سشن فعال برای عمل ' + caseNo)
+                    : ('سشن فعال برای بیمار ' + fullName);
+
+                btnItem.disabled = false;
+                setStep(2);
+                log('✅ مچ‌بند بیمار تأیید شد.');
+            } catch (e) {
+                log('❌ خطا در ثبت مچ‌بند: ' + e.message);
+            }
+
+        } else if (mode === 'item') {
+            if (!state.patient) {
+                log('⚠️ ابتدا مچ‌بند بیمار را اسکن کنید.');
+                setStep(1);
+                return;
+            }
+            log('در حال ثبت کالای مصرفی: ' + code);
+            try {
+                var x = await postJSON(API_ITEM, {
+                    code: code,
+                    caseId: state.patient.surgeryCaseId   // اگر DTO این فیلد را دارد
+                });
+                upsertItem(x);
+                log('📦 کالا ثبت شد.');
+            } catch (e) {
+                log('❌ خطا در ثبت کالا: ' + e.message);
+            }
+        }
     }
 
-    // event handlers
-    btnPatient.onclick = () => {
-    mode = 'patient';
-    setStep(1);
-    btnPatient.classList.add('primary');
-    btnItem.classList.remove('primary');
-    startScanner();
-    log('🎫 حالت اسکن مچ‌بند فعال شد.');
+    // ---- event handlers ----
+    btnPatient.onclick = function () {
+        mode = 'patient';
+        setStep(1);
+        btnPatient.classList.add('primary');
+        btnItem.classList.remove('primary');
+        startScanner();
+        log('🎫 حالت اسکن مچ‌بند فعال شد.');
     };
 
-    btnItem.onclick = () => {
-    if (!state.patient) {
-    log('⚠️ ابتدا مچ‌بند بیمار را اسکن کنید.');
-    return;
-    }
-    mode = 'item';
-    setStep(state.items.length ? 3 : 2);
-    btnItem.classList.add('primary');
-    btnPatient.classList.remove('primary');
-    startScanner();
-    log('📦 حالت اسکن اقلام فعال شد.');
+    btnItem.onclick = function () {
+        if (!state.patient) {
+            log('⚠️ ابتدا مچ‌بند بیمار را اسکن کنید.');
+            return;
+        }
+        mode = 'item';
+        setStep(state.items.length ? 3 : 2);
+        btnItem.classList.add('primary');
+        btnPatient.classList.remove('primary');
+        startScanner();
+        log('📦 حالت اسکن اقلام فعال شد.');
     };
 
-    btnFinalize.onclick = async () => {
-    if (!state.patient || !state.items.length) return;
-    btnFinalize.disabled = true;
-    log('⏳ در حال ارسال لیست اقلام به سرور...');
-    try {
-    // backend از سشن ACTIVE_SURGERY_CASE_ID استفاده می‌کند
-    await postJSON(API_BASE + '/finalize', {});
-    log('✅ ثبت نهایی با موفقیت انجام شد.');
-    alert('ثبت نهایی اقلام این عمل انجام شد.');
-    clearAll();
-    } catch (e) {
-    log('❌ خطا در نهایی‌سازی: ' + e.message);
-    btnFinalize.disabled = false;
-    }
+    btnFinalize.onclick = async function () {
+        if (!state.patient || !state.items.length) return;
+        btnFinalize.disabled = true;
+        log('⏳ در حال ارسال لیست اقلام به سرور...');
+
+        try {
+            await postJSON(API_FINAL, {
+                caseId: state.patient.surgeryCaseId,
+                items: state.items
+            });
+            log('✅ ثبت نهایی با موفقیت انجام شد.');
+            alert('ثبت نهایی اقلام این عمل انجام شد.');
+            clearAll();
+        } catch (e) {
+            log('❌ خطا در نهایی‌سازی: ' + e.message);
+            btnFinalize.disabled = false;
+        }
     };
 
-    btnClear.onclick = () => {
-    clearAll();
+    btnClear.onclick = function () {
+        clearAll();
     };
 
-    window.addEventListener('beforeunload', () => {
-    stopScanner();
+    window.addEventListener('beforeunload', function () {
+        stopScanner();
     });
 
     // init
     clearAll();
-    </script>
-    </body>
-    </html>
+</script>
+</body>
+</html>

@@ -71,6 +71,8 @@ public class OrScanService {
         dto.setMrn(p.getMrn());
         dto.setFullName(p.getFullName());
         dto.setWard(p.getWard());
+        dto.setGender(p.getGender() != null ? p.getGender().name() : null);
+
 
         if (sc != null) {
             dto.setSurgeryCaseId(sc.getId());

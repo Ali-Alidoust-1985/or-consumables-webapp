@@ -9,29 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e8feb96-d982-4276-af92-4e8ba35cc504" name="Changes" comment="تنظیم چارچوب کلی و موجودیت ها و سرویس افزودن اکسل موجودی انبار و UI ادمین">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/OrConsumablesApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/ScanResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/UsageResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/ErrorResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/ItemScanResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/MessageDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/PatientScanResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/ScanRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/SurgeryConsumableUsage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/enums/SurgeryStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/OrScanService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/20b25a34-60e4-4b1a-9743-c94381aa831e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/20b25a34-60e4-4b1a-9743-c94381aa831e.xml" afterDir="false" />
+    <list default="true" id="5e8feb96-d982-4276-af92-4e8ba35cc504" name="Changes" comment="جدول بیمارها و امکان بارگذاری بیماران به صورت گروهی در پنل ادمین اضافه شد و اصلاحات در UI انجام شد">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patient_import_fake_names.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/servlet/PatientImportServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/PatientImportService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/dto/PatientImportResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ليست لوزم داروخانه.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseConsumption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseConsumption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/CaseReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Consumable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Consumable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/IrcCatalogItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/IrcCatalogItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/OperatingRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/OperatingRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Patient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/SurgeryCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/entity/SurgeryCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/PatientScanResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/controller/api/dto/PatientScanResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/OrScanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mftplus/eesample/model/service/OrScanService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/panel.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/panel.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/sabt.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/sabt.jsp" afterDir="false" />
     </list>
@@ -83,30 +70,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;TomEE Server.TomEE 9.1..executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Java EE/or-consumables-webapp&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TomEE Server.TomEE 9.1..executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Java EE/or-consumables-webapp",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;oracle&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "oracle"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="TomEE 9.1." type="TomeeConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="TomEE 9.1." ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="C:/Program Files/Java/jdk-11" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -223,7 +212,8 @@
       <workItem from="1763975988614" duration="2000000" />
       <workItem from="1763982350081" duration="97000" />
       <workItem from="1763982529999" duration="4425000" />
-      <workItem from="1764014539409" duration="10224000" />
+      <workItem from="1764014539409" duration="10619000" />
+      <workItem from="1764067978505" duration="4421000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -273,15 +263,26 @@
       <option name="project" value="LOCAL" />
       <updated>1763983580448</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="UI بازنویسی شد به جای JSQR از Google ZXing استفاده شد هم QR و هم بارکد را اتوماتیک میخواند، بک اند و API ها تکمیل شدند">
+      <option name="closed" value="true" />
+      <created>1764067905419</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1764067905419</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="First Commit" />
     <MESSAGE value="تنظیم چارچوب کلی و موجودیت ها و سرویس افزودن اکسل موجودی انبار و UI ادمین" />
-    <option name="LAST_COMMIT_MESSAGE" value="تنظیم چارچوب کلی و موجودیت ها و سرویس افزودن اکسل موجودی انبار و UI ادمین" />
+    <MESSAGE value="UI بازنویسی شد به جای JSQR از Google ZXing استفاده شد هم QR و هم بارکد را اتوماتیک میخواند، بک اند و API ها تکمیل شدند" />
+    <MESSAGE value="جدول بیمارها و امکان بارگذاری بیماران به صورت گروهی در پنل ادمین اضافه شد و اصلاحات در UI انجام شد" />
+    <option name="LAST_COMMIT_MESSAGE" value="جدول بیمارها و امکان بارگذاری بیماران به صورت گروهی در پنل ادمین اضافه شد و اصلاحات در UI انجام شد" />
   </component>
 </project>

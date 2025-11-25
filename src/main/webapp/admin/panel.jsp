@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
@@ -34,6 +37,8 @@
             font-size:1.4rem;
             margin:0 0 12px;
         }
+        h2{font-size:1.1rem;margin:0 0 10px;}
+        h3{font-size:1rem;margin:0 0 8px;}
 
         .tabs{
             display:flex;
@@ -75,7 +80,9 @@
             min-width:110px;
             font-size:.9rem;
         }
-        input[type=text],input[type=number],select{
+        input[type=text],
+        input[type=number],
+        select{
             padding:6px 10px;
             border-radius:8px;
             border:1px solid var(--border);
@@ -86,12 +93,18 @@
             font-size:.85rem;
         }
 
-        button{
+        button,
+        .btn{
             border:0;
             border-radius:999px;
             padding:8px 14px;
             font-size:.9rem;
             cursor:pointer;
+            text-decoration:none;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:6px;
         }
         .btn-primary{
             background:var(--primary);
@@ -149,8 +162,11 @@
             document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
             document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
 
-            document.getElementById('tab-'+id).classList.add('active');
-            document.getElementById('panel-'+id).classList.add('active');
+            const tab   = document.getElementById('tab-'+id);
+            const panel = document.getElementById('panel-'+id);
+            if (tab)   tab.classList.add('active');
+            if (panel) panel.classList.add('active');
+
             history.replaceState(null,'','#'+id);
         }
 
@@ -173,6 +189,7 @@
 
     <div class="tabs">
         <div class="tab" id="tab-import"   onclick="showTab('import')">ایمپورت کاتالوگ (Excel)</div>
+        <div class="tab" id="tab-patients" onclick="showTab('patients')">بیماران</div>
         <div class="tab" id="tab-search"   onclick="showTab('search')">جستجو و ویرایش کالا</div>
         <div class="tab" id="tab-rooms"    onclick="showTab('rooms')">اتاق‌های عمل</div>
         <div class="tab" id="tab-staff"    onclick="showTab('staff')">پرسنل</div>
@@ -182,10 +199,12 @@
     <!-- IMPORT -->
     <div class="card panel" id="panel-import">
         <h2>ایمپورت کاتالوگ از Excel</h2>
-        <p class="muted">فایل نمونه شامل ستون‌های IRC، نام کالا، GTIN، قیمت و واحد را می‌توانی در همین صفحه برای کاربرها لینک بدهی.</p>
+        <p class="muted">
+            فایل نمونه شامل ستون‌های IRC، نام کالا، GTIN، قیمت و واحد را می‌توانی از لینک زیر دانلود کنی.
+        </p>
 
         <form method="post"
-              action="<c:url value='/admin/catalog/import'/>"
+              action="${ctx}/admin/catalog/import"
               enctype="multipart/form-data">
             <div class="row">
                 <label>فایل Excel:</label>
@@ -204,10 +223,9 @@
                 </select>
             </div>
             <div class="row">
-                <button type="submit" class="btn-primary">آپلود و اجرای ایمپورت</button>
-                <a href="<c:url value='/admin/catalog/template'/>"
-                   class="btn-secondary"
-                   style="text-decoration:none;display:inline-block;margin-right:4px;">
+                <button type="submit" class="btn btn-primary">آپلود و اجرای ایمپورت</button>
+                <a href="${ctx}/admin/catalog/template"
+                   class="btn btn-secondary">
                     دانلود فایل نمونه
                 </a>
             </div>
@@ -233,13 +251,80 @@
         </c:if>
     </div>
 
+    <!-- PATIENTS -->
+    <div class="card panel" id="panel-patients">
+        <h2>ایمپورت / مدیریت فهرست بیماران</h2>
+
+        <form method="post"
+              action="${ctx}/admin/patients/import"
+              enctype="multipart/form-data">
+            <div class="row">
+                <label>فایل Excel بیماران:</label>
+                <input type="file" name="file" accept=".xlsx,.xls" required />
+            </div>
+            <div class="row">
+                <span class="muted">
+                    ستون‌های پیشنهادی: <b>patientCode, fullName, gender, birthDate, ward</b>.<br>
+                    اگر ستونی موجود نباشد، مقدار آن برای بیمار خالی گذاشته می‌شود.
+                </span>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-primary">آپلود و ایمپورت بیماران</button>
+            </div>
+        </form>
+
+        <c:if test="${not empty patientImportResult}">
+            <h3>نتیجهٔ آخرین ایمپورت بیماران</h3>
+            <table>
+                <tr><th>کل رکوردها</th><td>${patientImportResult.totalRows}</td></tr>
+                <tr><th>بیماران جدید</th><td>${patientImportResult.inserted}</td></tr>
+                <tr><th>به‌روزرسانی شده</th><td>${patientImportResult.updated}</td></tr>
+            </table>
+
+            <c:if test="${not empty patientImportResult.messages}">
+                <h4>پیام‌ها</h4>
+                <ul class="muted">
+                    <c:forEach var="m" items="${patientImportResult.messages}">
+                        <li><pre style="white-space:pre-wrap;margin:0;">${m}</pre></li>
+                    </c:forEach>
+                </ul>
+            </c:if>
+        </c:if>
+
+        <c:if test="${not empty patients}">
+            <h3 style="margin-top:16px;">نمونه‌ای از بیماران ثبت‌شده</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>کد بیمار</th>
+                    <th>نام و نام خانوادگی</th>
+                    <th>جنسیت</th>
+                    <th>تاریخ تولد</th>
+                    <th>بخش</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="p" items="${patients}">
+                    <tr>
+                        <td>${p.patientCode}</td>
+                        <td>${p.fullName}</td>
+                        <td>${p.gender}</td>
+                        <td>${p.birthDate}</td>
+                        <td>${p.ward}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+    </div>
+
     <!-- SEARCH -->
     <div class="card panel" id="panel-search">
         <h2>جستجو و ویرایش کالاها</h2>
-        <form method="get" action="<c:url value='/admin/catalog/search'/>">
+        <form method="get" action="${ctx}/admin/catalog/search">
             <div class="row">
                 <input type="text" name="q" placeholder="IRC، GTIN یا نام کالا..." value="${param.q}">
-                <button type="submit" class="btn-secondary">جستجو</button>
+                <button type="submit" class="btn btn-secondary">جستجو</button>
             </div>
         </form>
 
@@ -275,9 +360,9 @@
     <!-- ROOMS -->
     <div class="card panel" id="panel-rooms">
         <h2>مدیریت اتاق‌های عمل</h2>
-        <p class="muted">CRUD ساده برای OperatingRoom – فعلاً اسکلت HTML؛ backend را مطابق Entity خودت پر کن.</p>
+        <p class="muted">CRUD ساده برای OperatingRoom – بک‌اند را مطابق Entity خودت پیاده‌سازی کن.</p>
 
-        <form method="post" action="<c:url value='/admin/rooms/save'/>">
+        <form method="post" action="${ctx}/admin/rooms/save">
             <div class="row">
                 <label>کد OR:</label>
                 <input type="text" name="code" required>
@@ -291,11 +376,10 @@
                 <input type="text" name="department">
             </div>
             <div class="row">
-                <button type="submit" class="btn-primary">ذخیره</button>
+                <button type="submit" class="btn btn-primary">ذخیره</button>
             </div>
         </form>
 
-        <!-- لیست فعلی OR ها -->
         <c:if test="${not empty rooms}">
             <table>
                 <thead><tr><th>کد</th><th>نام</th><th>بخش</th></tr></thead>
@@ -317,7 +401,7 @@
         <h2>مدیریت پرسنل</h2>
         <p class="muted">ثبت جراح، بیهوشی و پرستار برای اتصال به پرونده‌های عمل.</p>
 
-        <form method="post" action="<c:url value='/admin/staff/save'/>">
+        <form method="post" action="${ctx}/admin/staff/save">
             <div class="row">
                 <label>کد پرسنلی:</label>
                 <input type="text" name="code" required>
@@ -335,7 +419,7 @@
                 </select>
             </div>
             <div class="row">
-                <button type="submit" class="btn-primary">ذخیره</button>
+                <button type="submit" class="btn btn-primary">ذخیره</button>
             </div>
         </form>
 
@@ -360,7 +444,7 @@
         <h2>تنظیمات سیستم</h2>
         <p class="muted">این مقادیر را می‌توانی در جدول تنظیمات (Config) نگه‌داری کنی.</p>
 
-        <form method="post" action="<c:url value='/admin/settings/save'/>">
+        <form method="post" action="${ctx}/admin/settings/save">
             <div class="row">
                 <label>Sheet پیش‌فرض ایمپورت:</label>
                 <input type="text" name="defaultSheet" value="${settings.defaultSheet}">
@@ -382,7 +466,7 @@
                 <input type="text" name="numberFormat" value="${settings.numberFormat}">
             </div>
             <div class="row">
-                <button type="submit" class="btn-primary">ذخیره تنظیمات</button>
+                <button type="submit" class="btn btn-primary">ذخیره تنظیمات</button>
             </div>
         </form>
     </div>
